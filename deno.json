@@ -1,0 +1,24 @@
+{
+  "tasks": {
+    "dev": "deno run -A --watch ./deno_code/main.ts",
+    "test": "deno test -A --watch ./deno_code"
+  },
+  "lint": {
+    "include": ["./deno_code"],
+    "rules": {
+      "tags": ["recommended"],
+      "include": [""],
+      "exclude": ["s"]
+    }
+  },
+  "fmt": {
+    "useTabs": true,
+    "lineWidth": 80,
+    "indentWidth": 4,
+    "semiColons": false,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": ["./deno_code"],
+    "exclude": ["src/testdata/", "data/fixtures/**/*.ts"]
+  }
+}
