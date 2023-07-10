@@ -1,6 +1,11 @@
-import { HTTP_METHODS } from "./constants";
-import { getJson, getText } from "./internals";
+import { HTTP_METHODS } from "./constants.ts";
+import { getJson, getText } from "./internals.ts";
 
+/**
+ * This is a generic schema type.
+ * It represents an object with a `parse` function
+ * that converts an unknown value to a value of type `T`.
+ */
 type Schema<T> = { parse: (d: unknown) => T };
 
 type JSONValue =
