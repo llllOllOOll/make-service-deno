@@ -1,6 +1,6 @@
 {
   "deno.enable": true,
   "deno.lint": true,
-  "deno.unstable": true,
-  "deno.enablePaths": ["./deno_code"]
+  "deno.unstable": true
+  //  "deno.enablePaths": ["./deno_code"]
 }
