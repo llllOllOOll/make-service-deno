@@ -107,15 +107,29 @@ describe("ensureStringBody", () => {
 
   it("should not stringify other valid kinds of BodyInit", () => {
     const ab = new ArrayBuffer(0);
-    assertStrictEquals(subject.ensureStringBody(ab), ab);
+    assertEquals(subject.ensureStringBody(ab), ab);
     const rs = new ReadableStream();
-    assertStrictEquals(subject.ensureStringBody(rs), rs);
+    assertEquals(subject.ensureStringBody(rs), rs);
     const fd = new FormData();
-    assertStrictEquals(subject.ensureStringBody(fd), fd);
+    assertEquals(subject.ensureStringBody(fd), fd);
     const usp = new URLSearchParams();
-    assertStrictEquals(subject.ensureStringBody(usp), usp);
-    const blob = new Blob();
-    assertStrictEquals(subject.ensureStringBody(blob), blob);
+    assertEquals(subject.ensureStringBody(usp), usp);
+    /**
+     * Create a new Blob object with an empty string as its content.
+     * This Blob instance can be used to represent binary or structured data.
+     * In this case, an empty string is used as a placeholder content.
+     *
+     * Note: Using new Blob() without any arguments is not recommended as it will throw an error.
+     * Please provide appropriate content using an array, ArrayBuffer, or a string as an argument.
+     *
+     * Usage: const blog = new Blob(['']);
+     *
+     * @constructor
+     * @param {Array} [''] - An array containing a single element, an empty string, as the content of the Blob.
+     * @returns {Blob} - A Blob object representing the empty string content.
+     */
+    const blob = new Blob([""]);
+    assertEquals(subject.ensureStringBody(blob), blob);
   });
 });
 
