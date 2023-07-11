@@ -53,4 +53,101 @@ describe("deep transforms", () => {
       >
     >;
   });
+
+  it("camelToSnake", () => {
+    const result = subject.camelToSnake({
+      some: { deepNested: { value: true } },
+      otherValue: true,
+    });
+    assertEquals(result, {
+      some: { deep_nested: { value: true } },
+      other_value: true,
+    });
+    type test = Expect<
+      Equal<
+        typeof result,
+        { some: { deep_nested: { value: boolean } }; other_value: boolean }
+      >
+    >;
+  });
+
+  it("kebabToCamel", () => {
+    const result = subject.kebabToCamel({
+      some: { "deep-nested": { value: true } },
+      "other-value": true,
+    });
+    assertEquals(result, {
+      some: { deepNested: { value: true } },
+      otherValue: true,
+    });
+    type test = Expect<
+      Equal<
+        typeof result,
+        { some: { deepNested: { value: boolean } }; otherValue: boolean }
+      >
+    >;
+  });
+
+  it("kebabToSnake", () => {
+    const result = subject.kebabToSnake({
+      some: { "deep-nested": { value: true } },
+      "other-value": true,
+    });
+    assertEquals(result, {
+      some: { deep_nested: { value: true } },
+      other_value: true,
+    });
+    type test = Expect<
+      Equal<
+        typeof result,
+        { some: { deep_nested: { value: boolean } }; other_value: boolean }
+      >
+    >;
+  });
+
+  it("snakeToCamel", () => {
+    const result = subject.snakeToCamel({
+      some: { deep_nested: { value: true } },
+      other_value: true,
+    });
+
+    assertEquals(result, {
+      some: { deepNested: { value: true } },
+      otherValue: true,
+    });
+
+    type test = Expect<
+      Equal<
+        typeof result,
+        { some: { deepNested: { value: boolean } }; otherValue: boolean }
+      >
+    >;
+  });
+
+  it("snakeToKebab", () => {
+    const result = subject.snakeToKebab({
+      some: { deep_nested: { value: true } },
+      other_value: true,
+    });
+    assertEquals(result, {
+      some: { "deep-nested": { value: true } },
+      "other-value": true,
+    });
+    type test = Expect<
+      Equal<
+        typeof result,
+        { some: { "deep-nested": { value: boolean } }; "other-value": boolean }
+      >
+    >;
+  });
+
+  it("should transform deep nested objects and array of objects", () => {
+    const result = subject.kebabToCamel([
+      { some: { "deep-nested": [{ value: true }] } },
+    ]);
+    assertEquals(result, [{ some: { deepNested: [{ value: true }] } }]);
+    type test = Expect<
+      Equal<typeof result, { some: { deepNested: { value: boolean }[] } }[]>
+    >;
+  });
 });
